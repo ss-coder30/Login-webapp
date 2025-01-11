@@ -1,0 +1,4 @@
+Module.exports = {
+    SignIn: '',
+    SignUp: ''
+}
