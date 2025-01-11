@@ -18,11 +18,17 @@ namespace backend.Controllers
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp(SignUpRequest request)
         {
-            var response = new SignUpResponse
+            SignUpResponse response = new SignUpResponse(); // Corrected type
+
+            try
             {
-                IsSuccess = true,
-                Message = "User signed up successfully!"
-            };
+                response = await _authDL.SignUp(request);
+            }
+            catch (Exception e)
+            {
+                response.IsSuccess = false;
+                response.Message = e.Message;
+            }
 
             return Ok(response);
         }
@@ -30,11 +36,16 @@ namespace backend.Controllers
         [HttpPost("SignIn")]
         public async Task<IActionResult> SignIn(SignInRequest request)
         {
-            var response = new SignInResponse
+            SignInResponse response = new SignInResponse();
+
+            try {
+                response = await _authDL.SignIn(request);
+            }
+            catch (Exception e)
             {
-                IsSuccess = true,
-                Message = "User signed in successfully!"
-            };
+                response.IsSuccess = false;
+                response.Message = e.Message;
+            }
 
             return Ok(response);
         }
