@@ -1,31 +1,40 @@
-using System.*;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using backend.DataAccessLayer;
 using backend.Model;
 
-namespace backend.Controllers {
-    [Route(template "api/[controller]")]
+namespace backend.Controllers
+{
+    [Route("api/[controller]")]
     [ApiController]
+    public class AuthController : ControllerBase
+    {
+        private readonly IAuthDL _authDL;
 
-    public class AuthController : ControllerBase{
-
-        public readonly IAuthDL _authDL;
-
-        public AuthController(IAuthDL authDL){
-            _authDL = authDL
+        public AuthController(IAuthDL authDL)
+        {
+            _authDL = authDL;
         }
 
-        public async Task<IActionResult> SignUp(SignUpRequest request){
+        [HttpPost("SignUp")]
+        public async Task<IActionResult> SignUp(SignUpRequest request)
+        {
+            var response = new SignUpResponse
+            {
+                IsSuccess = true,
+                Message = "User signed up successfully!"
+            };
 
-            SignUpResponse response = new SignUpResponse();
+            return Ok(response);
+        }
 
-            try {
-
-            } catch (Exception e) {
-                response.IsSuccess = false;
-                response.Message = e.Message;
-            }
+        [HttpPost("SignIn")]
+        public async Task<IActionResult> SignIn(SignInRequest request)
+        {
+            var response = new SignInResponse
+            {
+                IsSuccess = true,
+                Message = "User signed in successfully!"
+            };
 
             return Ok(response);
         }

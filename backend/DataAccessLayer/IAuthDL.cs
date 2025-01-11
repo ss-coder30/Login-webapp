@@ -1,9 +1,11 @@
-using System.*;
+using System.Threading.Tasks;
 using backend.Model;
 
-namespace backend.DataAccesslayer {
+namespace backend.DataAccessLayer
+{
     public interface IAuthDL
     {
-        public Task<SignUpResponse> SignUp(SignUpRequest request)
+        Task<SignUpResponse> SignUp(SignUpRequest request);
+        Task<SignInResponse> SignIn(SignInRequest request);
     }
 }

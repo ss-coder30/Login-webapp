@@ -1,20 +1,30 @@
-using System.*;
+using System;
+using System.Threading.Tasks;
 using backend.Model;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 
-namespace backend.DataAccesslayer {
-    public class AuthDL : IAuthDL {
+namespace backend.DataAccessLayer
+{
+    public class AuthDL : IAuthDL
+    {
+        private readonly IConfiguration _configuration;
+        private readonly MySqlConnection _mySqlConnection;
 
-        public readonly IConfiguration _configuration;
-        public readonly MySqlConnection _MySqlConnection;
-
-        public AuthDL(IConfiguration configuration){
-            _configuration = configuration 
+        public AuthDL(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _mySqlConnection = new MySqlConnection(_configuration["ConnectionStrings:MySqlConnection"]);
         }
 
-        public Task<SignUpResponse> SignUp(SignUpRequest request){
+        public Task<SignUpResponse> SignUp(SignUpRequest request)
+        {
             throw new NotImplementedException();
         }
-    } 
+
+        public Task<SignInResponse> SignIn(SignInRequest request)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
