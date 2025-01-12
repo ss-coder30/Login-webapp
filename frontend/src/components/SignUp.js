@@ -65,19 +65,27 @@ class SignUp extends Component {
         .then((response) => {
           console.log("Sign-up successful: ", response);
           if(response.data.isSuccess){
+            alert("Signed up successfully!");
             this.props.navigate('/signin');
           }
           else {
+            alert("Sign-in failed, please check details!");
             console.log("something went wrong!");
           }
         })
         .catch((error) => {
+          alert("Sign-in failed, please check details!");
           console.error("Error during sign-up: ", error);
         });
     } else {
+      alert("Sign-in failed, please check details!");
       console.log("Validation failed");
     }
   };
+
+  handleSignin = (e) => {
+    this.props.navigate("/signin");
+  }
 
   render() {
     return (
@@ -144,16 +152,18 @@ class SignUp extends Component {
           <div className="Button h-[15%] w-full flex justify-around items-center">
             <button
               type="button"
-              className="SignUp Btn border bg-blue-600 text-white pt-2 pb-2 pl-4 pr-4 rounded-lg mb-20 text-xl"
+              className="SignIn Btn bg-slate-200 pt-2 pb-2 pl-4 pr-4 rounded-lg text-blue-600 mb-20 hover: border-solid border-blue-400"
+              onClick={this.handleSignin}
+            >
+              Sign In
+            </button>
+
+            <button
+              type="button"
+              className="SignUp Btn border bg-blue-600 text-white pt-2 pb-2 pl-4 pr-4 rounded-lg mb-20"
               onClick={this.handleSubmit}
             >
               Sign Up
-            </button>
-            <button
-              type="button"
-              className="SignIn Btn bg-slate-200 pt-2 pb-2 pl-4 pr-4 rounded-lg text-blue-600 mb-20 hover: border-solid border-blue-400 text-xl"
-            >
-              Sign In
             </button>
           </div>
         </div>
