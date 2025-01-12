@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import AuthServices from "../services/AuthServices";
+import { useNavigate } from "react-router-dom";
 
 const authService = new AuthServices();
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor() {
     super();
     this.state = {
@@ -63,6 +64,12 @@ export default class SignUp extends Component {
         .SignUp(data)
         .then((response) => {
           console.log("Sign-up successful: ", response);
+          if(response.data.isSuccess){
+            this.props.navigate('/signin');
+          }
+          else {
+            console.log("something went wrong!");
+          }
         })
         .catch((error) => {
           console.error("Error during sign-up: ", error);
@@ -132,13 +139,6 @@ export default class SignUp extends Component {
                     : "Confirm Password is required"}
                 </span>
               )}
-
-              {/* <button
-                type="submit"
-                className="SignUp Btn border bg-blue-600 text-white pt-2 pb-2 pl-4 pr-4 rounded-lg mt-4 text-xl"
-              >
-                Sign Up
-              </button> */}
             </form>
           </div>
           <div className="Button h-[15%] w-full flex justify-around items-center">
@@ -161,3 +161,11 @@ export default class SignUp extends Component {
     );
   }
 }
+
+// Higher-Order Component to Use `useNavigate`
+function SignUpWrapper() {
+  const navigate = useNavigate();
+  return <SignUp navigate={navigate} />;
+}
+
+export default SignUpWrapper;
