@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 export default class SignIn extends Component {
   render() {
     return (
-      <div className="Signup-container h-full w-full flex justify-center items-center bg-zinc-900">
-        <div className="Signup-subcontainer h-[70%] w-[45%] border border-gray-300 rounded-lg bg-zinc-800">
+      <div className="Signin-container h-full w-full flex justify-center items-center bg-zinc-900">
+        <div className="Signin-subcontainer h-[70%] w-[45%] border border-gray-300 rounded-lg bg-zinc-800">
           <div className="Header h-[15%] w-full flex justify-center items-center text-blue-500 text-[30px] font-medium mt-5">
             Sign In
           </div>
